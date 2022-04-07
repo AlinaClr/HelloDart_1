@@ -38,6 +38,66 @@ int fibonacci(int n){
   return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
+class Spacecraft{
+  String name;
+  DateTime? launchDate;
+
+  int? get launchYear => launchDate?.year;
+
+  Spacecraft(this.name,this.launchDate){
+    //TODO : init.
+  }
+
+  Spacecraft.unlaunched(String name) : this(name,null);
+
+  void describe(){
+    print('Spacecraft: $name');
+
+    var launchDate = this.launchDate;
+    if(launchDate != null){
+      int years = DateTime.now().difference(launchDate).inDays ~/ 365;
+      print('Launched: $launchYear ($years years ago)');
+    }else{
+      print('Unlaunched');
+    }
+  }
+}
+
+//扩展类
+class Orbiter extends Spacecraft{
+  double altitude;
+
+  Orbiter(String name,DateTime launchDate,this.altitude)
+     : super(name,launchDate);
+
+  //重写父类方法
+  @override
+  void describe(){
+    super.describe();
+    print('altitude is $altitude km');
+  }
+}
+
+void inheritance(){
+  var obt = Orbiter('天宫号',DateTime(2021,4,29),389.2);
+  obt.describe();
+}
+
+//Minxin语法，注入
+mixin Piloted{
+  int astronauts = 1;
+
+  void describeCrew(){
+    print('Number of astronauts: $astronauts');
+  }
+}
+
+void mixins(){
+  var plt = PilotedCraft('神舟一号',DateTime(1999,11,20));
+  plt.describe();
+  plt.describeCrew();
+}
+
 void main(List<String> args){
     variables();
     var year = 2010;
@@ -45,5 +105,9 @@ void main(List<String> args){
     control_flow(year, flybyObjects);
     var result = fibonacci(20);
     print(result);
-}
+    var voyager = Spacecraft('Voyager I', DateTime(1977, 9, 5));
+    voyager.describe();
 
+    var voyager3 = Spacecraft.unlaunched('Voyager III');
+    voyager3.describe();
+}
