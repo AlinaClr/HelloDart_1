@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2022-04-21 10:55:25
- * @LastEditTime: 2022-04-21 10:56:57
- * @LastEditors: your name
+ * @LastEditTime: 2022-04-28 00:45:03
+ * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /HelloDart_1/02_libraty.dart
  */
@@ -51,4 +51,10 @@ void dart_core()
   assert(' hello '.trim() == 'hello');
   assert(''.isEmpty);
   assert('  '.isNotEmpty);
+  //替换部分字符串
+  var greetingTemplate = 'Hello, NAME!';
+  var greeting = greetingTemplate.replaceAll(RegExp('NAME'),'Bob');
+  assert(greeting != greetingTemplate);
+  //构建一个字符串
+  
 }
